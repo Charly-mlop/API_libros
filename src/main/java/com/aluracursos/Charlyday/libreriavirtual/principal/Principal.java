@@ -45,8 +45,16 @@ public class Principal {
                     break;
                 case 2:
                     listarLibrosRegistrados();
+                case 3:
+                    listarPorAutor();
             }
         }
+    }
+
+    private List<LibroDTO> listarPorAutor() {
+        System.out.println("Escribe el nombre del autor que deseas buscar");
+        var autor = src.nextLine();
+        return libroService.listarPorAutor(autor);
     }
 
     private void buscarLibroWeb() {

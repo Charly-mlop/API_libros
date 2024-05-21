@@ -60,4 +60,10 @@ public class LibroService {
                 .map(a -> new AutorDTO(a.getNombre()))
                 .collect(Collectors.toList());
     }
+
+    public List<LibroDTO> listarPorAutor(String autor) {
+        List<LibroDTO> libroList = connvierteDatos(repository.findLibrosByAutor(autor));
+        libroList.forEach(System.out::println);
+        return libroList;
+    }
 }

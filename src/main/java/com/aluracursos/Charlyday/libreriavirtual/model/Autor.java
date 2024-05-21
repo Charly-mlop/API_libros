@@ -21,17 +21,8 @@ public class Autor {
 
     public Autor(DatosAutor datosAutor) {
         this.nombre = datosAutor.nombre();
-        if (datosAutor.nacimiento() != null) {
-            this.nacimiento = Integer.valueOf(datosAutor.nacimiento());
-
-        }else {
-            this.nacimiento = 0;
-        }
-        if (datosAutor.muerte() != null) {
-            this.muerte = Integer.valueOf(datosAutor.muerte());
-            }else {
-            this.muerte = 0;
-        }
+        this.nacimiento = datosAutor.nacimiento() != null ? Integer.valueOf(datosAutor.nacimiento()) : 0;
+        this.muerte = datosAutor.muerte() != null ? Integer.valueOf(datosAutor.muerte()) : 0;
     }
 
 
@@ -78,11 +69,9 @@ public class Autor {
     @Override
     public String toString() {
         return "Autor{" +
-                "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", nacimiento=" + nacimiento +
                 ", muerte=" + muerte +
-                ", libros=" + libros +
                 '}';
     }
 }
