@@ -2,7 +2,6 @@ package com.aluracursos.Charlyday.libreriavirtual.service;
 
 import com.aluracursos.Charlyday.libreriavirtual.dto.AutorDTO;
 import com.aluracursos.Charlyday.libreriavirtual.dto.LibroDTO;
-import com.aluracursos.Charlyday.libreriavirtual.dto.LibroPorAutorDTO;
 import com.aluracursos.Charlyday.libreriavirtual.model.Autor;
 import com.aluracursos.Charlyday.libreriavirtual.model.DatosLibro;
 import com.aluracursos.Charlyday.libreriavirtual.model.Libro;

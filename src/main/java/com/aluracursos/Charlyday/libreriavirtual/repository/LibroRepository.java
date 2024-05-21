@@ -11,9 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface LibroRepository extends JpaRepository<Libro, Long> {
-    Optional<Autor> findByTitulo(String titulo);
-
     Optional<Object> findByTituloEquals(String titulo);
-    @Query("SELECT l FROM Libro l JOIN l.autores a WHERE a.nombre LIKE %:nombreAutor%")
-    List<Libro> findLibrosByAutor(String nombreAutor);
 }

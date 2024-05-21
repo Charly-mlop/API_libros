@@ -1,8 +1,6 @@
 package com.aluracursos.Charlyday.libreriavirtual.model;
 
-import com.aluracursos.Charlyday.libreriavirtual.service.AutorService;
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 @Entity
