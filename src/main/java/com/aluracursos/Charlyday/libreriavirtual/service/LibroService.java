@@ -23,16 +23,23 @@ public class LibroService {
 
     @Transactional
     public void crearLibroDesdeDatos(DatosLibro datosLibro) {
-        Libro libro = new Libro();
-        libro.setTitulo(datosLibro.titulo());
-        List<Autor> autores = datosLibro.autores().stream()
-                .map(autorService::obtenerORegistrarAutor)
-                .collect(Collectors.toList());
-        libro.setAutores(autores);
-        libro.setLenguajes(datosLibro.lenguajes());
-        libro.setNumeroDescargas(datosLibro.numeroDescargas());
-        System.out.println(libro);
-        repository.save(libro);
+
+        repository.findByTituloEquals(datosLibro.titulo())
+                .ifPresentOrElse(
+                        libroExistente -> System.out.println("El libro ya está registrado en la base de datos."),
+                        () -> {
+                            Libro libro = new Libro();
+                            libro.setTitulo(datosLibro.titulo());
+                            List<Autor> autores = datosLibro.autores().stream()
+                                    .map(autorService::obtenerORegistrarAutor)
+                                    .collect(Collectors.toList());
+                            libro.setAutores(autores);
+                            libro.setLenguajes(datosLibro.lenguajes());
+                            libro.setNumeroDescargas(datosLibro.numeroDescargas());
+                            repository.save(libro);
+                            System.out.println("Libro registrado " + libro);
+                        }
+                );
     }
 
     public List<LibroDTO> listarLibrosRegistrados() {

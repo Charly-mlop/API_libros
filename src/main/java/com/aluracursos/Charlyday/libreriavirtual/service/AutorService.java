@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AutorService {
     @Autowired
-    private AutorRepository autorRepository;
+    private AutorRepository repository;
     public Autor obtenerORegistrarAutor(DatosAutor datosAutor) {
-        return autorRepository.findByNombre(datosAutor.nombre())
+        return repository.findByNombre(datosAutor.nombre())
                 .orElseGet(() -> {
                     Autor autor = new Autor(datosAutor);
-                    return autorRepository.save(autor);
+                    return repository.save(autor);
                 });
     }
 }
