@@ -1,5 +1,6 @@
 package com.aluracursos.Charlyday.libreriavirtual.principal;
 
+import com.aluracursos.Charlyday.libreriavirtual.dto.AutorPorFechaDTO;
 import com.aluracursos.Charlyday.libreriavirtual.dto.AutorYLibrosDTO;
 import com.aluracursos.Charlyday.libreriavirtual.dto.LibroDTO;
 import com.aluracursos.Charlyday.libreriavirtual.model.*;
@@ -50,8 +51,16 @@ public class Principal {
                 case 3:
                     System.out.println(texto.librosPorAutor(listarPorAutor()));
                     break;
+                case 4:
+                    System.out.println(texto.autoresPorFecha(autoresPorFecha()));
             }
         }
+    }
+
+    private List<AutorPorFechaDTO> autoresPorFecha() {
+        System.out.println("Escribe el año en que quieres buscar");
+        Integer fecha = src.nextInt();
+        return autorService.listarAutorPorFecha(fecha);
     }
 
     private List<AutorYLibrosDTO> listarPorAutor() {

@@ -20,13 +20,15 @@ public class LibroService {
     private LibroRepository repository;
     @Autowired
     private AutorService autorService;
+    @Autowired
+    private Texto texto;
 
     @Transactional
     public void crearLibroDesdeDatos(DatosLibro datosLibro) {
 
         repository.findByTituloEquals(datosLibro.titulo())
                 .ifPresentOrElse(
-                        libroExistente -> System.out.println("El libro ya está registrado en la base de datos."),
+                        libroExistente -> System.out.println("-----LIBRO YA REGISTRADO -----"),
                         () -> {
                             Libro libro = new Libro();
                             libro.setTitulo(datosLibro.titulo());
@@ -37,7 +39,7 @@ public class LibroService {
                             libro.setLenguajes(datosLibro.lenguajes());
                             libro.setNumeroDescargas(datosLibro.numeroDescargas());
                             repository.save(libro);
-                            System.out.println("Libro registrado " + libro);
+                            System.out.println(texto.libroGuardadoExitoso(libro));
                         }
                 );
     }

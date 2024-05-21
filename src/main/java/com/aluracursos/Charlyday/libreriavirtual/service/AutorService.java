@@ -1,5 +1,6 @@
 package com.aluracursos.Charlyday.libreriavirtual.service;
 
+import com.aluracursos.Charlyday.libreriavirtual.dto.AutorPorFechaDTO;
 import com.aluracursos.Charlyday.libreriavirtual.dto.AutorYLibrosDTO;
 import com.aluracursos.Charlyday.libreriavirtual.dto.LibroPorAutorDTO;
 import com.aluracursos.Charlyday.libreriavirtual.model.Autor;
@@ -38,6 +39,12 @@ public class AutorService {
     private List<LibroPorAutorDTO> convierteDatosLibro(List<Libro> libros) {
         return libros.stream()
                 .map(l -> new LibroPorAutorDTO(l.getTitulo(), l.getLenguajes(), l.getNumeroDescargas()))
+                .collect(Collectors.toList());
+    }
+
+    public List<AutorPorFechaDTO> listarAutorPorFecha(Integer fecha) {
+        return repository.findAutoresVivosEnAnio(fecha).stream()
+                .map(a -> new AutorPorFechaDTO(a.getNombre(), a.getNacimiento(), a.getMuerte()))
                 .collect(Collectors.toList());
     }
 }

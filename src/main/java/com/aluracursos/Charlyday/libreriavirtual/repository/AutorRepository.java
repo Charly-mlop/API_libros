@@ -14,4 +14,7 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
 
     @Query("SELECT a FROM Autor a WHERE LOWER(a.nombre) LIKE LOWER(CONCAT('%', %:nombre%, '%'))")
     List<Autor> findByNombreContainingIgnoreCase(String nombre);
+
+    @Query("SELECT a FROM Autor a WHERE :fecha >= a.nacimiento AND :fecha <= a.muerte")
+    List<Autor> findAutoresVivosEnAnio(Integer fecha);
 }
