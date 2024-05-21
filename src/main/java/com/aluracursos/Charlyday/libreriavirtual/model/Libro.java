@@ -1,6 +1,8 @@
 package com.aluracursos.Charlyday.libreriavirtual.model;
 
+import com.aluracursos.Charlyday.libreriavirtual.service.AutorService;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 @Entity
@@ -17,7 +19,7 @@ public class Libro {
             inverseJoinColumns = @JoinColumn(name = "autor_id")
     )
     private List<Autor> autores;
-    private List<String> leguajes;
+    private List<String> lenguajes;
     private Integer numeroDescargas;
 
     public Long getId() {
@@ -44,12 +46,12 @@ public class Libro {
         this.autores = autores;
     }
 
-    public List<String> getLeguajes() {
-        return leguajes;
+    public List<String> getLenguajes() {
+        return lenguajes;
     }
 
-    public void setLeguajes(List<String> leguajes) {
-        this.leguajes = leguajes;
+    public void setLenguajes(List<String> leguajes) {
+        this.lenguajes = leguajes;
     }
 
     public Integer getNumeroDescargas() {
@@ -58,5 +60,16 @@ public class Libro {
 
     public void setNumeroDescargas(Integer numeroDescargas) {
         this.numeroDescargas = numeroDescargas;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", autores=" + autores +
+                ", leguajes=" + lenguajes +
+                ", numeroDescargas=" + numeroDescargas +
+                '}';
     }
 }

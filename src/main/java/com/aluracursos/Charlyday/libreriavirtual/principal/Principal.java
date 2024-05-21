@@ -1,17 +1,26 @@
 package com.aluracursos.Charlyday.libreriavirtual.principal;
 
-import com.aluracursos.Charlyday.libreriavirtual.model.ApiResponse;
-import com.aluracursos.Charlyday.libreriavirtual.model.DatosLibro;
+import com.aluracursos.Charlyday.libreriavirtual.model.*;
+import com.aluracursos.Charlyday.libreriavirtual.repository.AutorRepository;
+import com.aluracursos.Charlyday.libreriavirtual.repository.LibroRepository;
+import com.aluracursos.Charlyday.libreriavirtual.service.AutorService;
 import com.aluracursos.Charlyday.libreriavirtual.service.ConsumoAPI;
 import com.aluracursos.Charlyday.libreriavirtual.service.ConvierteDatos;
+import com.aluracursos.Charlyday.libreriavirtual.service.LibroService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class Principal {
     private final Scanner src = new Scanner(System.in);
     private final ConsumoAPI consumoAPI = new ConsumoAPI();
     private final String URL_BASE = "https://gutendex.com/books/?search=";
     private final ConvierteDatos convierteDatos = new ConvierteDatos();
+    @Autowired
+    private LibroService libroService;
 
     public void muestraElMenu() {
         var opcion = -1;
@@ -42,6 +51,7 @@ public class Principal {
         if (apiResponse.resultados() != null && !apiResponse.resultados().isEmpty()){
             DatosLibro datosLibro = apiResponse.resultados().get(0);
             System.out.println(datosLibro);
+            libroService.crearLibroDesdeDatos(datosLibro);
         }else {
             System.out.println("No se encontraron resultados\n");
         }
@@ -51,7 +61,7 @@ public class Principal {
     private ApiResponse getDatosLibro() {
         System.out.println("Escribe el nombre del libro que quieres buscar");
         var nombreLibro = src.nextLine();
-        var json = consumoAPI.obtenerDatos(URL_BASE + nombreLibro.replace(" ", "").replace("and", "%20"));
+        var json = consumoAPI.obtenerDatos(URL_BASE + nombreLibro.replace(" ", "+").replace("and", "%20"));
         ApiResponse datos = convierteDatos.obtenerDatos(json, ApiResponse.class);
         return datos;
     }

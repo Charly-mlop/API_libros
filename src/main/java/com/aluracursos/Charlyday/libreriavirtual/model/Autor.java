@@ -16,6 +16,25 @@ public class Autor {
     @ManyToMany(mappedBy = "autores")
     private List<Libro> libros;
 
+    public Autor() {
+    }
+
+    public Autor(DatosAutor datosAutor) {
+        this.nombre = datosAutor.nombre();
+        if (datosAutor.nacimiento() != null) {
+            this.nacimiento = Integer.valueOf(datosAutor.nacimiento());
+
+        }else {
+            this.nacimiento = 0;
+        }
+        if (datosAutor.muerte() != null) {
+            this.muerte = Integer.valueOf(datosAutor.muerte());
+            }else {
+            this.muerte = 0;
+        }
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -54,5 +73,16 @@ public class Autor {
 
     public void setLibros(List<Libro> libros) {
         this.libros = libros;
+    }
+
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", nacimiento=" + nacimiento +
+                ", muerte=" + muerte +
+                ", libros=" + libros +
+                '}';
     }
 }
