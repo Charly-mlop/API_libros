@@ -1,5 +1,6 @@
 package com.aluracursos.Charlyday.libreriavirtual.principal;
 
+import com.aluracursos.Charlyday.libreriavirtual.dto.LibroDTO;
 import com.aluracursos.Charlyday.libreriavirtual.model.*;
 import com.aluracursos.Charlyday.libreriavirtual.repository.AutorRepository;
 import com.aluracursos.Charlyday.libreriavirtual.repository.LibroRepository;
@@ -42,6 +43,8 @@ public class Principal {
                 case 1:
                     buscarLibroWeb();
                     break;
+                case 2:
+                    listarLibrosRegistrados();
             }
         }
     }
@@ -64,5 +67,9 @@ public class Principal {
         var json = consumoAPI.obtenerDatos(URL_BASE + nombreLibro.replace(" ", "+").replace("and", "%20"));
         ApiResponse datos = convierteDatos.obtenerDatos(json, ApiResponse.class);
         return datos;
+    }
+
+    private List<LibroDTO> listarLibrosRegistrados() {
+        return libroService.listarLibrosRegistrados();
     }
 }
