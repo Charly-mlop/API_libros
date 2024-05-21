@@ -13,7 +13,7 @@ public class Autor {
     private String nombre;
     private Integer nacimiento;
     private Integer muerte;
-    @ManyToMany(mappedBy = "autores")
+    @ManyToMany(mappedBy = "autores", fetch = FetchType.EAGER)
     private List<Libro> libros;
 
     public Autor() {

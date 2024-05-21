@@ -1,13 +1,9 @@
 package com.aluracursos.Charlyday.libreriavirtual.principal;
 
+import com.aluracursos.Charlyday.libreriavirtual.dto.AutorYLibrosDTO;
 import com.aluracursos.Charlyday.libreriavirtual.dto.LibroDTO;
 import com.aluracursos.Charlyday.libreriavirtual.model.*;
-import com.aluracursos.Charlyday.libreriavirtual.repository.AutorRepository;
-import com.aluracursos.Charlyday.libreriavirtual.repository.LibroRepository;
-import com.aluracursos.Charlyday.libreriavirtual.service.AutorService;
-import com.aluracursos.Charlyday.libreriavirtual.service.ConsumoAPI;
-import com.aluracursos.Charlyday.libreriavirtual.service.ConvierteDatos;
-import com.aluracursos.Charlyday.libreriavirtual.service.LibroService;
+import com.aluracursos.Charlyday.libreriavirtual.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +12,17 @@ import java.util.Scanner;
 
 @Component
 public class Principal {
+    private String autor;
     private final Scanner src = new Scanner(System.in);
     private final ConsumoAPI consumoAPI = new ConsumoAPI();
     private final String URL_BASE = "https://gutendex.com/books/?search=";
     private final ConvierteDatos convierteDatos = new ConvierteDatos();
     @Autowired
+    private Texto texto;
+    @Autowired
     private LibroService libroService;
+    @Autowired
+    private AutorService autorService;
 
     public void muestraElMenu() {
         var opcion = -1;
@@ -29,7 +30,7 @@ public class Principal {
             var menu = """
                     1 - Buscar libro por titulo
                     2 - Listar libros registrados
-                    3 - Listar autores registrados
+                    3 - Listar libros por autores registrados
                     4 - Listar autores vivos en un determinado año
                     5 - Listar libros por idioma
                     
@@ -44,17 +45,19 @@ public class Principal {
                     buscarLibroWeb();
                     break;
                 case 2:
-                    listarLibrosRegistrados();
+                    System.out.println(texto.libros(listarLibrosRegistrados()));;
+                    break;
                 case 3:
-                    listarPorAutor();
+                    System.out.println(texto.librosPorAutor(listarPorAutor()));
+                    break;
             }
         }
     }
 
-    private List<LibroDTO> listarPorAutor() {
+    private List<AutorYLibrosDTO> listarPorAutor() {
         System.out.println("Escribe el nombre del autor que deseas buscar");
-        var autor = src.nextLine();
-        return libroService.listarPorAutor(autor);
+        autor = src.nextLine();
+        return autorService.listarPorAutor(autor);
     }
 
     private void buscarLibroWeb() {

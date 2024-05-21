@@ -2,6 +2,7 @@ package com.aluracursos.Charlyday.libreriavirtual.service;
 
 import com.aluracursos.Charlyday.libreriavirtual.dto.AutorDTO;
 import com.aluracursos.Charlyday.libreriavirtual.dto.LibroDTO;
+import com.aluracursos.Charlyday.libreriavirtual.dto.LibroPorAutorDTO;
 import com.aluracursos.Charlyday.libreriavirtual.model.Autor;
 import com.aluracursos.Charlyday.libreriavirtual.model.DatosLibro;
 import com.aluracursos.Charlyday.libreriavirtual.model.Libro;
@@ -43,9 +44,7 @@ public class LibroService {
     }
 
     public List<LibroDTO> listarLibrosRegistrados() {
-        List<LibroDTO> libroDTOList = connvierteDatos(repository.findAll());
-        libroDTOList.forEach(System.out::println);
-        return libroDTOList;
+        return connvierteDatos(repository.findAll());
     }
 
     private List<LibroDTO> connvierteDatos(List<Libro> libros) {
@@ -61,9 +60,4 @@ public class LibroService {
                 .collect(Collectors.toList());
     }
 
-    public List<LibroDTO> listarPorAutor(String autor) {
-        List<LibroDTO> libroList = connvierteDatos(repository.findLibrosByAutor(autor));
-        libroList.forEach(System.out::println);
-        return libroList;
-    }
 }
