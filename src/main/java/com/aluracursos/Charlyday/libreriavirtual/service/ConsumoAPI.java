@@ -6,7 +6,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-//Clase para obtener los datos solicitados
 public class ConsumoAPI {
     public String obtenerDatos(String url) {
         HttpClient client = HttpClient.newHttpClient();

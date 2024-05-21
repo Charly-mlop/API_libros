@@ -16,13 +16,14 @@ public class Autor {
     @ManyToMany(mappedBy = "autores", fetch = FetchType.EAGER)
     private List<Libro> libros;
 
+    @SuppressWarnings("unused")
     public Autor() {
     }
 
     public Autor(DatosAutor datosAutor) {
         this.nombre = datosAutor.nombre();
-        this.nacimiento = datosAutor.nacimiento() != null ? Integer.valueOf(datosAutor.nacimiento()) : 0;
-        this.muerte = datosAutor.muerte() != null ? Integer.valueOf(datosAutor.muerte()) : 0;
+        this.nacimiento = datosAutor.nacimiento() != null ? datosAutor.nacimiento() : 0;
+        this.muerte = datosAutor.muerte() != null ? datosAutor.muerte() : 0;
     }
 
 

@@ -87,21 +87,28 @@ public class Texto {
         src.nextLine();
 
         switch (opcion) {
-            case 1:
+            case 1 -> {
                 return "en";
-            case 2:
+            }
+            case 2 -> {
                 return "es";
-            case 3:
+            }
+            case 3 -> {
                 return "fr";
-            case 4:
+            }
+            case 4 -> {
                 return "de";
-            case 5:
+            }
+            case 5 -> {
                 return "it";
-            case 0:
-                return ""; // Opción de salida, no se selecciona ningún idioma
-            default:
+            }
+            case 0 -> {
+                return "";
+            }
+            default -> {
                 System.out.println("Opción no válida. Por favor, selecciona una opción válida.");
-                return menuIdiomas(); // Vuelve a solicitar la selección del idioma
+                return menuIdiomas();
+            }
         }
     }
 

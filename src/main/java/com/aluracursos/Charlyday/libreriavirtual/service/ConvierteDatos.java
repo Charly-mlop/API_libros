@@ -3,7 +3,6 @@ package com.aluracursos.Charlyday.libreriavirtual.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//Clase que mapea un archivo json para obtener los datos necesarios
 public class ConvierteDatos implements IConvierteDatos {
     private ObjectMapper objectMapper = new ObjectMapper();
 
