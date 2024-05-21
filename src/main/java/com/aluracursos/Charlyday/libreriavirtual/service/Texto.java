@@ -6,10 +6,12 @@ import com.aluracursos.Charlyday.libreriavirtual.model.Libro;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @Service
 public class Texto {
+    Scanner src = new Scanner(System.in);
     StringBuilder sb = new StringBuilder();
     public String libros(List<LibroDTO> libros) {
         for (LibroDTO libro : libros) {
@@ -65,4 +67,42 @@ public class Texto {
         }
         return  sb.toString();
     }
+
+    public String menuIdiomas() {
+        var opcion = -1;
+
+        var menu = """
+            1 - Ingles
+            2 - Español
+            3 - Frances
+            4 - Aleman
+            5 - Italiano
+            
+            0 - Salir
+            """;
+
+        System.out.println(menu);
+
+        opcion = src.nextInt();
+        src.nextLine();
+
+        switch (opcion) {
+            case 1:
+                return "en";
+            case 2:
+                return "es";
+            case 3:
+                return "fr";
+            case 4:
+                return "de";
+            case 5:
+                return "it";
+            case 0:
+                return ""; // Opción de salida, no se selecciona ningún idioma
+            default:
+                System.out.println("Opción no válida. Por favor, selecciona una opción válida.");
+                return menuIdiomas(); // Vuelve a solicitar la selección del idioma
+        }
+    }
+
 }

@@ -53,8 +53,15 @@ public class Principal {
                     break;
                 case 4:
                     System.out.println(texto.autoresPorFecha(autoresPorFecha()));
+                case 5:
+                    System.out.println(texto.libros(librosPorIdioma()));
             }
         }
+    }
+
+    private List<LibroDTO> librosPorIdioma() {
+        var idioma = texto.menuIdiomas();
+        return libroService.librosPorIdioma(idioma);
     }
 
     private List<AutorPorFechaDTO> autoresPorFecha() {

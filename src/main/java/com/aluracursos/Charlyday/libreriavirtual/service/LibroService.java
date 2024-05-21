@@ -61,4 +61,7 @@ public class LibroService {
                 .collect(Collectors.toList());
     }
 
+    public List<LibroDTO> librosPorIdioma(String idioma) {
+        return connvierteDatos(repository.findLibrosPorIdioma(idioma));
+    }
 }
